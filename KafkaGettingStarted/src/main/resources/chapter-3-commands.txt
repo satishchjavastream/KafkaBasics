@@ -1,0 +1,78 @@
+#
+# This file contains the shell commands for the Kafka Essentials : Getting Started Course
+#
+
+## Logging into the Kafka Container
+
+        docker exec -it kafka-broker /bin/bash
+
+## Navigate to the Kafka Scripts directory
+
+        cd /opt/bitnami/kafka/bin
+
+## Creating new Topics
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --create \
+            --topic kafka.learning.tweets \
+            --partitions 1 \
+            --replication-factor 1
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --create \
+            --topic kafka.learning.alerts \
+            --partitions 1 \
+            --replication-factor 1
+
+## Got error using above commands due to => Newer versions(2.2+) of Kafka no longer requires ZooKeeper connection string --zookeeper localhost:2181
+## Below commands used to create the new topic:
+	./kafka-topics.sh --create --topic kafka.learning.tweets --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+	./kafka-topics.sh --create --topic kafka.learning.alerts --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+
+## Listing Topics
+
+        ./kafka-topics.sh --zookeeper zookeeper:2181 --list
+
+./kafka-topics.sh --list --bootstrap-server localhost:9092
+
+## Getting details about a Topic
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --describe
+
+./kafka-topics.sh --describe --bootstrap-server localhost:9092
+
+## Publishing Messages to Topics
+
+        ./kafka-console-producer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.learning.tweets
+
+./kafka-console-producer.sh --bootstrap-server localhost:29092 --topic kafka.learning.tweets
+
+## Consuming Messages from Topics
+
+        ./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.learning.tweets \
+            --from-beginning
+
+            ./kafka-console-consumer.sh --topic kafka.learning.tweets --bootstrap-server localhost:29092 -- from-beginning
+
+## Deleting Topics
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --delete \
+            --topic kafka.learning.alerts
+
+./kafka-topics.sh --topic kafka.learning.alerts --delete --bootstrap-server localhost:9092
+
+
+
+

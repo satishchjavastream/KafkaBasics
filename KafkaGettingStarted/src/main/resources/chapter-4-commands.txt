@@ -1,0 +1,39 @@
+
+#Create a Topic with multiple partitions
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --create \
+            --topic kafka.learning.orders \
+            --partitions 3 \
+            --replication-factor 1
+
+./kafka-topics.sh --create --topic kafka.learning.orders --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+
+#Check topic partitioning
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --topic kafka.learning.orders \
+            --describe
+
+./kafka-topics.sh --topic kafka.learning.orders --bootstrap-server localhost:9092 --describe
+
+## Publishing Messages to Topics with keys
+
+        ./kafka-console-producer.sh \
+            --bootstrap-server localhost:29092 \
+            --property "parse.key=true" \
+            --property "key.separator=:" \
+            --topic kafka.learning.orders
+
+./kafka-console-producer.sh --bootstrap-server localhost:29092 --topic kafka.learning.orders --property "parse.key=true" --property "key.separator=:"
+
+## Consume messages using a consumer group
+
+./kafka-console-consumer.sh --bootstrap-server localhost:29092 --topic kafka.learning.orders --group test-consumer-group --property print.key=true --property key.separator=" = " --from-beginning
+
+## Check current status of offsets
+
+        ./kafka-consumer-groups.sh --bootstrap-server localhost:29092 --describe --all-groups
+

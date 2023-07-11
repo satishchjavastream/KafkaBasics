@@ -1,0 +1,100 @@
+Docker commands:
+================
+-------
+1)docker-compose -f kafka-single-node.yml up -d
+-------
+
+The command docker-compose -f kafka-single-node.yml up -d is used to start Docker containers defined in a Docker Compose file in detached mode. 
+Let's break down the command and understand its components:
+
+docker-compose: 
+This is the command-line tool for managing multi-container Docker applications using Docker Compose.
+
+-f kafka-single-node.yml: 
+The -f flag specifies the Docker Compose file to be used. In this case, the file name is kafka-single-node.yml. 
+Docker Compose files are typically written in YAML format and define the services, networks, and volumes required for a multi-container application.
+
+up: 
+This command is used to create and start the containers defined in the Docker Compose file. 
+It will build images if necessary and start containers based on the specified configuration.
+
+-d: 
+The -d flag stands for "detached" mode. It instructs Docker to run the containers in the background and return control to the command prompt immediately. 
+In detached mode, the containers continue to run in the background, allowing you to use the command prompt for other tasks.
+
+By executing docker-compose -f kafka-single-node.yml up -d, 
+Docker Compose will read the kafka-single-node.yml file, create and start the containers specified in the file, and run them in the background. 
+This command is particularly useful when working with multi-container applications, as it simplifies the process of starting and managing multiple containers as a cohesive unit.
+
+
+-------
+2)docker-compose -f kafka-single-node.yml
+-------
+
+The command docker-compose -f kafka-single-node.yml down is used to stop and remove the Docker containers defined in a Docker Compose file. Let's break down the command and understand its components:
+
+docker-compose: This is the command-line tool for managing multi-container Docker applications using Docker Compose.
+
+-f kafka-single-node.yml: The -f flag specifies the Docker Compose file to be used. In this case, the file name is kafka-single-node.yml. Docker Compose files are typically written in YAML format and define the services, networks, and volumes required for a multi-container application.
+
+down: This command is used to stop and remove the containers defined in the Docker Compose file. It will also remove any networks and volumes associated with those containers.
+
+By executing docker-compose -f kafka-single-node.yml down, Docker Compose will read the kafka-single-node.yml file, identify the containers, networks, and volumes defined in the file, and proceed to stop and remove them.
+
+This command is useful when you want to clean up and tear down the containers and associated resources created by a Docker Compose file. It ensures that the containers are properly stopped and removed, freeing up system resources and leaving a clean state.
+
+It's worth noting that the down command does not remove the Docker images associated with the containers. If you also want to remove the images, you can use the docker-compose -f kafka-single-node.yml down --volumes --rmi all command, which adds the --volumes and --rmi all options to the down command. This will remove volumes and also delete all the images specified in the Docker Compose file.
+
+-------
+3)lists all the running containers
+-------
+
+docker ps : This command lists all the running containers on your system.
+
+docker ps -a : it shows only the running containers. To display all containers, including the ones that are not currently running, you can add the -a flag
+
+docker container ls : This command is an alias for docker ps and provides similar functionality. It lists the running containers on your system.
+
+docker container ls -a : Similar to docker ps, you can use the -a flag to list all containers, including the stopped ones:
+
+docker inspect <container_id> : This command provides detailed information about a specific container.
+
+-------
+4) To start a container in Docker
+-------
+
+docker start <container_id_or_name> : executing the docker start command will initiate the container and bring it back to a running state
+
+docker start my_container : To start a container in Docker
+
+docker run <image_name> : To create and start a new container
+
+docker exec -it kafka-broker /bin/bash
+
+-------
+5) docker exec -it kafka-broker /bin/bash
+-------
+This command will take into the kafka container. Navigae to the root directry of the kafka.
+
+
+kafka-server-start.sh
+kafka-server-stop.sh
+
+
+Exception in thread "main" joptsimple.UnrecognizedOptionException: zookeeper is not a recognized option
+
+
+./kafka-topics.sh \
+    --zookeeper zookeeper:2181 \
+    --create \
+    --topic kafka.learning.tweets \
+    --partitions 1 \
+    --replication-factor 1
+	
+	./kafka-topics.sh --create --topic kafka.learning.tweets --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+	
+	./kafka-topics.sh --create --topic kafka.learning.alerts --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+	
+	
+	docker exec -it zookeeper /bin/bash
+
